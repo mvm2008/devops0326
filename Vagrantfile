@@ -1,7 +1,6 @@
 Vagrant.configure("2") do |config|
 
-  config.vm.provision "shell", path: "script.sh"
-
+   config.vm.provision "shell", path: "script.sh"
 
    config.vm.define "controle" do |controle|
         controle.vm.box = "shekeriev/debian-11"
@@ -16,7 +15,12 @@ Vagrant.configure("2") do |config|
             ansible.playbook = "playbook.yml"
             ansible.install_mode = "pip"
         end
+        controle.vm.provision "ansible_local" do |ansible|
+            ansible.playbook = "installdocker.yml"
+            ansible.install_mode = "pip"
+        end
 #        controle.vm.provision "shell", inline: "apt -y install git"
+
    end
    config.vm.define "web" do |web|
         web.vm.box = "shekeriev/debian-11"
