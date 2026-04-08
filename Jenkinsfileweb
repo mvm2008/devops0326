@@ -5,7 +5,7 @@ pipeline {
 	stage('Executar playbook Ansible') {
             steps {
 		ansiblePlaybook(
-		    inventory:'ansibles/hosts',
+		    inventory:'ansible/hosts',
 		    playbook:'ansible/installweb.yml'
 		)
             }
